@@ -1,3 +1,4 @@
+// @ts-nocheck
 const Ev = (t, e, n) => {
   for (var r = ie(encode(n), 10), o = [], a = -1, i = 0; i < t.length; i++) {
     var l = Math.floor(i / r.length + 1),

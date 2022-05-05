@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, ChangeEvent } from 'react'
 import { GlobalMode, Dropdown } from './dropdown'
 import { json, tempPayload } from './data'
 import obfuscatePayload from '../../module/px/encode'
@@ -16,19 +16,19 @@ function PayloadBox(prop: propsTypes) {
   const [FinalPayload, setFinalPayload] = useState('')
   const [Payload, setPayload] = useState('')
 
-  const updateUuid = async (props: any, sent: string) => {
+  const updateUuid = (props?: ChangeEvent<HTMLInputElement>, sent?: string) => {
     if (sent) {
-      await setUuid(() => sent)
+      setUuid(() => sent)
     } else {
-      await setUuid(() => props.target.value)
+      setUuid(() => props!.target.value)
     }
   }
 
-  const updateSts = async (props: any, sent: string) => {
+  const updateSts = (props?: ChangeEvent<HTMLInputElement>, sent?: string) => {
     if (sent) {
       setSts(() => sent)
     } else {
-      setSts(() => props.target.value)
+      setSts(() => props!.target.value)
     }
   }
   const updateFinalPayload = async (value: string) => {
@@ -75,7 +75,7 @@ function PayloadBox(prop: propsTypes) {
       if (InputPayload.includes('payload')) {
         try {
           const ParsedUuid = InputPayload.match(`uuid=(.*)&ft`)
-          updateUuid(null, ParsedUuid[1])
+          updateUuid(undefined, ParsedUuid[1])
           const ParsedPayload = InputPayload.match(`payload=(.*)&appId`)
           setPayload(() => ParsedPayload[1])
         } catch (error) {}
@@ -98,7 +98,7 @@ function PayloadBox(prop: propsTypes) {
 
           m.forEach((match) => {
             if (match.length === 36) {
-              updateUuid(null, match)
+              updateUuid(undefined, match)
               return
             }
           })

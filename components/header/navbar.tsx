@@ -6,7 +6,7 @@ const navigation = [
   { name: 'PerimeterX ', href: '/px', current: false },
 ]
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
