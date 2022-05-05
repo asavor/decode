@@ -2,6 +2,7 @@ import type { NextPage } from 'next'
 import Navbar from '../components/header/navbar'
 import { PayloadBox } from '../components/body/payload'
 import Head from 'next/head'
+import Footer from '../components/footer/footer'
 import { GlobalMode } from '../components/body/dropdown'
 
 const Home: NextPage = () => {
@@ -23,6 +24,8 @@ const Home: NextPage = () => {
         <div className=" h-full  rounded-lg border bg-customColour p-6 shadow-md ">
           <PayloadBox trigger={mode}></PayloadBox>
         </div>
+
+        <Footer></Footer>
       </div>
     </div>
   )
