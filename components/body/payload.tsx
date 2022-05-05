@@ -86,6 +86,7 @@ function PayloadBox(prop: propsTypes) {
     } else {
       try {
         const payload = InputPayload
+
         setPayload(() => payload)
         const regex = /"PX10206":"(.*?)","/gm
         let m
