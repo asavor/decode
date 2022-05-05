@@ -7,7 +7,7 @@ const Home: NextPage = () => {
     <div className="h-screen">
       <html className="bg-darkcustomColour"></html>
       <Head>
-        <title>{'deocde.antibot.io'}</title>
+        <title>{`decode.antibot.to| Akamai`}</title>
       </Head>
       <Navbar></Navbar>
       <hr className="mb-10" />
