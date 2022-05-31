@@ -59,6 +59,7 @@ Returns all akamai site
 - Add akamai script to a S3 bucket so the user can download the script.
 - Monitor Px sites version
 - Decode akamai sensor data
+- Fix Nav bar on mobile device
 
 ## Contributing
 
