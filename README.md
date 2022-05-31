@@ -6,8 +6,9 @@ Open source tools to help you decode/encode sensor data.
 
 - Browser decoding/encoding
 - API decoding/encoding
+- Akamai version monitor
 
-## Usage
+## Usage decode
 
 ### PerimeterX
 
@@ -38,6 +39,26 @@ Open source tools to help you decode/encode sensor data.
 ## Demo
 
 ![](https://i.gyazo.com/09e680dc947627c59ff287c1ac9d64c4.gif)
+
+## Monitor
+
+Returns all akamai version
+
+```http
+  GET /api/akamai/version
+```
+
+Returns all akamai site
+
+```http
+  GET /api/akamai/monitor
+```
+
+## Roadmap
+
+- Add akamai script to a S3 bucket so the user can download the script.
+- Monitor Px sites version
+- Decode akamai sensor data
 
 ## Contributing
 

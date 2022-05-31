@@ -2,3 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+body{
+    background-color: #171229
+}
+
+.grecaptcha-badge {
+    visibility: hidden;
+}

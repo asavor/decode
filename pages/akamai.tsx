@@ -6,7 +6,6 @@ import Footer from '../components/footer/footer'
 const Home: NextPage = () => {
   return (
     <div className="h-screen">
-      <html className="bg-darkcustomColour"></html>
       <Head>
         <title>{`decode.antibot.to| Akamai`}</title>
       </Head>

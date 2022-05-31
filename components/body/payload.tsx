@@ -45,7 +45,6 @@ function PayloadBox(prop: propsTypes) {
   useEffect(() => {
     if (Decode) {
       try {
-        console.log(Uuid)
         if (Payload == '') {
           updateFinalPayload('')
         }
@@ -80,7 +79,6 @@ function PayloadBox(prop: propsTypes) {
           setPayload(() => ParsedPayload[1])
         } catch (error) {}
       } else {
-        console.log(InputPayload)
         setPayload(() => InputPayload)
       }
     } else {
