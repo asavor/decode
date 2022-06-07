@@ -67,6 +67,7 @@ const worker = async () => {
   if (siteList == null) {
     return await client.set('akamaiSite', '["https://www.nike.com/"]')
   }
+  console.log(siteList)
 
   JSON.parse(siteList).forEach(async (site: string) => {
     await monitor(site)
