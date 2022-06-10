@@ -31,17 +31,18 @@ export default async function handler(
   // res.status(200).json({ data: })
 }
 
-var job = new CronJob(
-  '*/5 * * * *',
-  async function () {
-    await worker()
-  },
-  null,
-  true,
-  'America/Los_Angeles'
-)
+//Doesnt work on serverless environment
+// var job = new CronJob(
+//   '*/5 * * * *',
+//   async function () {
+//     await worker()
+//   },
+//   null,
+//   true,
+//   'America/Los_Angeles'
+// )
 
-job.start()
+// job.start()
 const requestHeaders = {
   accept:
     'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -227,3 +228,5 @@ const checkVersion = async (data: AkamaiVersion) => {
   //update it inside the database
   return await client.set('akamaiVersion', JSON.stringify(parsedAkamaiVersion))
 }
+
+export { worker }
