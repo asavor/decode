@@ -9,20 +9,19 @@ export default async function handler(
   if (req.method != 'POST')
     return res.status(404).json({ success: false, message: 'path not found' })
   try {
-    if (req.method === 'POST') {
-      var { payload, uuid, sts } = req.body
-      //Checks if sts is included, however sts is not needed right now...
-      if (sts == undefined || sts.length == 0) {
-        sts = ''
-      }
+    var { payload, uuid, sts } = req.body
 
-      //Async call, as we need to wait for the functions to finish before sending the payload
-      const value = await deobfuscate(payload, uuid, sts)
-
-      return res
-        .status(200)
-        .json({ decodedPayload: JSON.parse(value), uuid: uuid })
+    //Checks if sts is included, however sts is not needed right now...
+    if (sts == undefined || sts.length == 0) {
+      sts = ''
     }
+
+    //Async call, as we need to wait for the functions to finish before sending the payload
+    const value = await deobfuscate(payload, uuid, sts)
+
+    return res
+      .status(200)
+      .json({ decodedPayload: JSON.parse(value), uuid: uuid })
   } catch (error) {
     console.log(error)
     return res.status(400).json({ error: 'error while decoding payload' })

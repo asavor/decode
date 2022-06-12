@@ -17,7 +17,12 @@ export default async function handler(
       sts = ''
     }
     //Async call, as we need to wait for the functions to finish before sending the payload
-    const value = await obfuscatePayload(JSON.stringify(payload), uuid, sts)
+
+    //Decode the base 64 input
+    const base64Deocde = atob(payload)
+
+    const jsonPayload = JSON.stringify(JSON.parse(base64Deocde))
+    const value = await obfuscatePayload(jsonPayload, uuid, sts)
 
     return res.status(200).json({ encodedPayload: value, uuid: uuid })
   } catch (error) {
