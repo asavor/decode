@@ -20,10 +20,13 @@ const Ev = (t, e, n) => {
   })
 }
 const encode = (t: string) => {
-  return btoa(
-    encodeURIComponent(t).replace(/%([0-9A-F]{2})/g, function (_t, e) {
-      return String.fromCharCode('0x' + e)
-    })
+  return Buffer.from(
+    encodeURIComponent(t).replace(
+      /%([0-9A-F]{2})/g,
+      function (_t, e) {
+        return String.fromCharCode('0x' + e)
+      }.toString('base64')
+    )
   )
 }
 
