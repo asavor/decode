@@ -9,7 +9,5 @@ jobs:
       - name: Call our API route
         run: |
           curl --request POST \
-          --url 'https://antibot.to/api/akamai/runtask' \
-          --header 'Authorization: Bearer ${{ taskAuth }}'
-
-      
+          --url 'https://decode.antibot.to/api/akamai/runtask' \
+          --header 'Authorization: Bearer ${{ secrets.TASKAUTH }}'
