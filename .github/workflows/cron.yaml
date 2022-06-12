@@ -10,6 +10,6 @@ jobs:
         run: |
           curl --request POST \
           --url 'https://antibot.to/api/akamai/runtask' \
-          --header 'Authorization: Bearer ${{ process.env.taskAuth }}'
+          --header 'Authorization: Bearer ${{ secrets.taskAuth }}'
 
       
