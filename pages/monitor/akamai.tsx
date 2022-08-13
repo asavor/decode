@@ -24,8 +24,8 @@ export async function getServerSideProps() {
     .catch((err) => {
       console.log(err)
     })
-  console.log(akamaiSiteList)
-  const akamaiSite = akamaiSiteList.datakey
+
+  const akamaiSite = akamaiSiteList.data
 
   const akamaiVersionList = await fetch(
     `${process.env.host}/api/monitor/akamai/version`
