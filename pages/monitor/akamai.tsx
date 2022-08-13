@@ -13,18 +13,22 @@ export interface siteList {
   akamaiSite: any
   akamaiVersion: any
 }
+
 export async function getServerSideProps() {
-  const akamaiSiteList = await fetch(`${process.env.host}/api/akamai/monitor`)
+  const akamaiSiteList = await fetch(
+    `${process.env.host}/api/monitor/akamai/monitor`
+  )
     .then((response) => {
       return response.json()
     })
     .catch((err) => {
       console.log(err)
     })
-  const akamaiSite = akamaiSiteList.data
+  console.log(akamaiSiteList)
+  const akamaiSite = akamaiSiteList.datakey
 
   const akamaiVersionList = await fetch(
-    `${process.env.host}/api/akamai/version`
+    `${process.env.host}/api/monitor/akamai/version`
   )
     .then((response) => {
       return response.json()
