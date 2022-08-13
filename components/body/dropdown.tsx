@@ -1,9 +1,8 @@
 import { Fragment, useState } from 'react'
 import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
-import { proxy, useSnapshot } from 'valtio'
+import { propsTypes } from './payload'
 
-const CurrentMode = proxy({ mode: 1 })
 const mode = [
   {
     id: 1,
@@ -19,9 +18,9 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
-function Dropdown() {
+function Dropdown(prop: propsTypes) {
   const [selected, setSelected] = useState(mode[0])
-  CurrentMode.mode = selected.id
+  prop.setDecode(selected.id)
 
   return (
     <Listbox value={selected} onChange={setSelected}>
@@ -95,8 +94,4 @@ function Dropdown() {
   )
 }
 
-const GlobalMode = () => {
-  return useSnapshot(CurrentMode)
-}
-
-export { GlobalMode, Dropdown }
+export { Dropdown }

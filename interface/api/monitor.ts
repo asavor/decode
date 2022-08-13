@@ -1,11 +1,11 @@
-interface Event {
+interface recaptchaPayloadEvent {
   token: string
   siteKey: string
   expectedAction: string
 }
 
 export interface recaptchaPayload {
-  event: Event
+  event: recaptchaPayloadEvent
 }
 
 export interface AkamaiVersion {
@@ -18,6 +18,7 @@ export interface website {
   website: string
   akamaiSiteVersion: AkamaiVersion[]
 }
+
 export interface version {
   identifier: string
   version: string
@@ -37,4 +38,33 @@ export interface errorResponse {
 
 export interface link {
   buttonText: string
+}
+
+export interface Event {
+  token: string
+  siteKey: string
+  userAgent: string
+  userIpAddress: string
+  expectedAction: string
+  hashedAccountId: string
+}
+
+export interface TokenProperties {
+  valid: boolean
+  invalidReason: string
+  hostname: string
+  action: string
+  createTime: Date
+}
+
+export interface RiskAnalysis {
+  score: number
+  reasons: any[]
+}
+
+export interface ReCaptchaResponse {
+  riskAnalysis: RiskAnalysis
+  name: string
+  event: Event
+  tokenProperties: TokenProperties
 }

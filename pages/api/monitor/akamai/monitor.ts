@@ -1,9 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next'
-
 import { sendWebhooks } from './webhook'
-import { CronJob } from 'cron'
 import { createHash } from 'crypto'
-import { client } from '../utils/redis'
+import { client } from '../../utils/redis'
 
 export default async function handler(
   req: NextApiRequest,
@@ -15,34 +13,22 @@ export default async function handler(
 
     const akamaiSite = Object.keys(JSON.parse(akamaiList))
 
-    var formatedList: { website: string; akamaiSiteVersion: any }[] = []
+    let formattedList: { website: string; akamaiSiteVersion: any }[] = []
 
     akamaiSite.forEach((url) => {
-      formatedList.push({
+      formattedList.push({
         website: url,
         akamaiSiteVersion: JSON.parse(akamaiList)[url],
       })
     })
 
-    res.status(200).json({ data: formatedList })
+    res.status(200).json({ data: formattedList })
   } catch (error) {
     console.log(error)
   }
   // res.status(200).json({ data: })
 }
 
-//Doesnt work on serverless environment
-// var job = new CronJob(
-//   '*/5 * * * *',
-//   async function () {
-//     await worker()
-//   },
-//   null,
-//   true,
-//   'America/Los_Angeles'
-// )
-
-// job.start()
 const requestHeaders = {
   accept:
     'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9',
@@ -70,19 +56,24 @@ const worker = async () => {
   }
   console.log(siteList)
 
-  JSON.parse(siteList).forEach(async (site: string) => {
-    await monitor(site)
+  JSON.parse(siteList).forEach((site: string) => {
+    monitor(site)
   })
 }
 
+/**
+ * Checks what version the website is using.
+ * @param {string} url Website protected by akamai
+ * @returns {Promise<string | null>}
+ */
 const monitor = async (url: string) => {
   try {
     // const url = 'https://www.nike.com/'
-    //Scrapes for akamai URL from home page
+    //Scrapes for Akamai URL from the home page
     const akamaiScriptUrl = await fetch(url, {
       headers: requestHeaders,
     }).then(async (response) => {
-      //Check if request was successfull or not.
+      //Check if request was successfully or not.
       if (response.status != 200) return 'Failed to get script'
 
       const responseBody = await response.text()
@@ -101,19 +92,20 @@ const monitor = async (url: string) => {
     }).then(async (response) => {
       return await response.text()
     })
-    //Scrapes a unique identifier of each unqiue script.
+    //Scrapes a unique identifier of each unique script.
 
     const scriptIdentifier = script.match(/\(function\(\){var (.*?);if/m)
 
     if (scriptIdentifier?.length != 2)
       return 'Can not find akamai script identifier'
 
-    //Turns a identifier into a hash as it will be easier to compare.
+    //Turns an identifier into a hash as it will be easier to compare.
+
     const checkSum = createHash('md5').update(scriptIdentifier[1]).digest('hex')
 
     const findSite = await client.get('akamaiSiteVersion')
     //Gets time right now in unix
-    var nowTime = new Date().getTime()
+    let nowTime = new Date().getTime()
 
     await checkVersion({
       identifier: scriptIdentifier[1],
@@ -124,7 +116,7 @@ const monitor = async (url: string) => {
     })
 
     if (findSite == null) {
-      //if URL does NOT exist in the database it creates a new one.
+      //Add the URL inside the database if it does not exist already.
       await client.set(
         'akamaiSiteVersion',
         JSON.stringify({
@@ -137,21 +129,12 @@ const monitor = async (url: string) => {
           ],
         })
       )
-      console.log({
-        [url]: [
-          {
-            identifier: scriptIdentifier[1],
-            checkSum: checkSum,
-            time: nowTime,
-          },
-        ],
-      })
 
       await sendWebhooks(url, akamaiScript, checkSum, scriptIdentifier[1])
     } else {
       const parsedData = JSON.parse(findSite)
-      //Check if the script exist in the database IF it doesnt add it and send a webhook.
 
+      //Check if the script exists in the database IF it doesn't add it and send a webhook.
       if (!parsedData.hasOwnProperty(url)) {
         parsedData[url] = [
           {
@@ -160,23 +143,16 @@ const monitor = async (url: string) => {
             time: nowTime,
           },
         ]
-        await await sendWebhooks(
-          url,
-          akamaiScript,
-          checkSum,
-          scriptIdentifier[1]
-        )
+        await sendWebhooks(url, akamaiScript, checkSum, scriptIdentifier[1])
         return await client.set('akamaiSiteVersion', JSON.stringify(parsedData))
       }
 
       //checks IF the script has changed or not.
-
       if (parsedData[url][parsedData[url].length - 1].checkSum == checkSum) {
         return
       }
 
-      //IF the script hasnt changed, stores it to the database and send a webhook
-
+      //IF the script has not changed, store it in the database and send a webhook
       parsedData[url].push({
         identifier: scriptIdentifier[1],
         checkSum: checkSum,
@@ -201,24 +177,30 @@ interface AkamaiVersion {
   downloadUrl: string
 }
 
-const checkVersion = async (data: AkamaiVersion) => {
+/**
+ * Checks if the akamai Version exist in the database if not it creates it.
+ * @param {AkamaiVersion} data
+ * @returns {Promise<void>}
+ */
+const checkVersion = async (data: AkamaiVersion): Promise<void> => {
   const akamaiVersion = await client.get('akamaiVersion')
 
-  //checks if akamaiVersion exist in the database if not it create it.
+  //Creating akamaiVersion inside Redis if the table doesn't exist.
   if (akamaiVersion == null) {
-    return await client.set('akamaiVersion', JSON.stringify(data))
+    await client.set('akamaiVersion', JSON.stringify(data))
+    return
   }
 
   const parsedAkamaiVersion = JSON.parse(akamaiVersion)
 
-  //checks if the akamai version exist inside the database or not.
-  var dupe: number = 0
+  //Checks if the akamai version exists inside the database or not.
+  let dupe: number = 0
   parsedAkamaiVersion.forEach((element: AkamaiVersion) => {
     if (element.checkSum == data.checkSum) {
       dupe++
     }
   })
-  //If it exist, it will return
+  //If it exists, it will return
 
   if (dupe != 0) {
     return
@@ -226,7 +208,8 @@ const checkVersion = async (data: AkamaiVersion) => {
   //Pushes the item into the array
   parsedAkamaiVersion.push(data)
   //update it inside the database
-  return await client.set('akamaiVersion', JSON.stringify(parsedAkamaiVersion))
+  await client.set('akamaiVersion', JSON.stringify(parsedAkamaiVersion))
+  return
 }
 
 export { worker }

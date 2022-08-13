@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from 'next'
 
-import { client } from '../utils/redis'
+import { client } from '../../utils/redis'
 
 export default async function handler(
   req: NextApiRequest,

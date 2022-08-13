@@ -1,4 +1,5 @@
 import { createClient } from 'redis'
+
 const client = createClient({ url: process.env.REDIS_URL })
 
 client.on('ready', function () {
@@ -9,6 +10,6 @@ client.on('end', () => {
   console.log('CacheStore - Connection status: disconnected')
 })
 //connects to the database
-client.connect()
+client.connect().then((r) => console.log('Connected to redis'))
 
 export { client }

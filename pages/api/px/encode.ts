@@ -20,10 +20,10 @@ export default async function handler(
 
     //Decode the base 64 input
 
-    const base64Deocde = Buffer.from(payload, 'base64').toString()
+    const base64Decode = Buffer.from(payload, 'base64').toString()
 
-    const jsonPayload = JSON.stringify(JSON.parse(base64Deocde))
-    const value = await obfuscatePayload(jsonPayload, uuid, sts)
+    const jsonPayload = JSON.stringify(JSON.parse(base64Decode))
+    const value = obfuscatePayload(jsonPayload, uuid, sts)
 
     return res.status(200).json({ encodedPayload: value, uuid: uuid })
   } catch (error) {

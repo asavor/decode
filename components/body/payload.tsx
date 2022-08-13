@@ -1,15 +1,21 @@
-import React, { useEffect, useState, ChangeEvent } from 'react'
-import { GlobalMode, Dropdown } from './dropdown'
+import React, {
+  useEffect,
+  useState,
+  ChangeEvent,
+  SetStateAction,
+  Dispatch,
+} from 'react'
+import { Dropdown } from './dropdown'
 import { json, tempPayload } from './data'
 import obfuscatePayload from '../../module/px/encode'
 import deobfuscate from '../../module/px/decode'
 
 export interface propsTypes {
-  trigger: number
+  mode?: number
+  setDecode: Dispatch<SetStateAction<number>>
 }
-function PayloadBox(prop: propsTypes) {
-  var Decode = GlobalMode().mode
 
+function PayloadBox(prop: propsTypes) {
   const [Uuid, setUuid] = useState('')
 
   const [Sts, setSts] = useState('')
@@ -31,8 +37,8 @@ function PayloadBox(prop: propsTypes) {
       setSts(() => props!.target.value)
     }
   }
-  const updateFinalPayload = async (value: string) => {
-    await setFinalPayload(() => value)
+  const updateFinalPayload = (value: string) => {
+    setFinalPayload(() => value)
   }
 
   useEffect(() => {
@@ -40,10 +46,10 @@ function PayloadBox(prop: propsTypes) {
     setFinalPayload(() => '')
     setSts(() => '')
     setUuid(() => '')
-  }, [prop.trigger])
+  }, [prop.mode])
 
   useEffect(() => {
-    if (Decode) {
+    if (prop.mode) {
       try {
         if (Payload == '') {
           updateFinalPayload('')
@@ -70,7 +76,7 @@ function PayloadBox(prop: propsTypes) {
 
   const updatePayload = (props: any) => {
     const InputPayload = props.target.value
-    if (Decode) {
+    if (prop.mode) {
       if (InputPayload.includes('payload')) {
         try {
           const ParsedUuid = InputPayload.match(`uuid=(.*)&ft`)
@@ -112,7 +118,7 @@ function PayloadBox(prop: propsTypes) {
     <div className="h-full">
       <div className="flex justify-center  ">
         <div>
-          <Dropdown></Dropdown>
+          <Dropdown setDecode={prop.setDecode}></Dropdown>
         </div>
         <div className="px-3">
           <div className="flex justify-start ">
@@ -161,13 +167,13 @@ function PayloadBox(prop: propsTypes) {
       <div className="grid h-full grid-cols-2 gap-6 pb-9 pt-4">
         <textarea
           onChange={updatePayload}
-          placeholder={Decode ? tempPayload : json}
+          placeholder={prop.mode ? tempPayload : json}
           className={' resize-none  bg-slate-900 text-white focus:outline-none'}
           disabled={false}
           value={Payload}
         ></textarea>
         <textarea
-          placeholder={Decode ? json : tempPayload}
+          placeholder={prop.mode ? json : tempPayload}
           className={'resize-none bg-slate-900  text-white focus:outline-none'}
           disabled={true}
           value={FinalPayload}

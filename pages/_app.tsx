@@ -5,10 +5,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <div>
       <Component {...pageProps} />
-      <script
-        type="text/javascript"
-        src="https://dashboard.antibot.to/akamai.js"
-      ></script>
+      <script type="text/javascript"></script>
     </div>
   )
 }
