@@ -9,15 +9,15 @@ export default async function handler(
   if (req.method != 'POST')
     return res.status(404).json({ success: false, message: 'path not found' })
   try {
-    var { payload, uuid, sts } = req.body
+    let { payload, uuid, sts } = req.body
 
-    //Checks if sts is included, however sts is not needed right now...
+    //Checks if sts is included however, sts is not needed right now...
     if (sts == undefined || sts.length == 0) {
       sts = ''
     }
 
     //Async call, as we need to wait for the functions to finish before sending the payload
-    const value = await deobfuscate(payload, uuid, sts)
+    const value = deobfuscate(payload, uuid, sts)
 
     return res
       .status(200)

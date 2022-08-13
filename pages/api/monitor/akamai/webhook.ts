@@ -1,6 +1,5 @@
-import { client } from '../utils/redis'
-
-import { recaptchaPayload } from '../../../interface/api/monitor'
+import { client } from '../../utils/redis'
+import { checkRecaptcha } from './utils/recaptcha'
 import { NextApiRequest, NextApiResponse } from 'next'
 
 export default async function handler(
@@ -11,11 +10,11 @@ export default async function handler(
 
   //Filtering out if the webhook body or captcha body is empty.
   if (captcha == undefined || captcha == '')
-    return res.status(400).json({ sucess: false, message: 'Invalid captcha' })
+    return res.status(400).json({ success: false, message: 'Invalid captcha' })
   if (webhook == undefined || webhook == '')
     return res
       .status(400)
-      .json({ sucess: false, message: 'Empty Discord Webhook Body' })
+      .json({ success: false, message: 'Empty Discord Webhook Body' })
 
   const recaptchaBody = {
     event: {
@@ -24,41 +23,41 @@ export default async function handler(
       expectedAction: 'discord',
     },
   }
-  //Send the formated payload to our function that fetches google recaptcha enterprise api to get info of the token provided.
+  //Send the formatted payload to our function that fetches google ReCaptcha enterprise API to get info of the token provided.
 
   const tokenResult = await checkRecaptcha(recaptchaBody)
 
-  //Checks if token exist in request if not response with invalid token.
-  //Checks if token is valid if not else response with invalid token.
+  //Checks if the token exists in the request if not respond with an invalid token.
+  //Checks if the token is valid if not else respond with an invalid token.
   if (
     tokenResult.event.token != captcha ||
-    tokenResult.tokenProperties.valid == false
+    !tokenResult.tokenProperties.valid
   ) {
-    return res.status(400).json({ sucess: false, message: 'Invalid captcha' })
+    return res.status(400).json({ success: false, message: 'Invalid captcha' })
   }
 
-  //Checks if the users score is over 0.7 if response with Invalid token.
-  //The error message is always "invalid captcha" as i do not want to give the attacker any infomation.
+  //Checks if the user's score is over 0.7 and if it responds with an Invalid token.
+  //The error message is always "invalid captcha" as I do not want to give the attacker any information.
   if (0.7 >= tokenResult.riskAnalysis.score) {
-    return res.status(400).json({ sucess: false, message: 'Invalid captcha' })
+    return res.status(400).json({ success: false, message: 'Invalid captcha' })
   }
 
-  //If the token is valid, We can be asure its not a spam and add the webhook url to the database.
+  //If the token is valid, We can be assured it's not spam and add the webhook URL to the database.
 
   const discordWebhookList = await client.get('discordWebhook')
 
   if (discordWebhookList == null) {
-    //If discord webhook list does not exist in the database, we will creates a new one with the webhook and saves it to the database.
+    //If the discord webhook list does not exist in the database, we will create a new one with the webhook and saves it to the database.
     await client.set('discordWebhook', `["${webhook}"]`)
 
     return res
       .status(200)
-      .json({ sucess: true, message: 'Discord webhook added!' })
+      .json({ success: true, message: 'Discord webhook added!' })
   }
   const parsedDiscordWebhookList = JSON.parse(discordWebhookList)
-  //Checking if the discord webhook already list inside the database. If it exist will return,  else it will add the URL to the database.
+  //Checking if the discord webhook already exists inside the database. If it exists will return, else it will add the URL to the database.
 
-  var item = 0
+  let item = 0
 
   parsedDiscordWebhookList.forEach((url: String) => {
     if (url == webhook) {
@@ -67,18 +66,19 @@ export default async function handler(
     }
   })
 
-  //If the number doesnt equal to 0 WE know the url alreayd exist in the database
+  //If the number doesn't equal 0, WE know the URL already exists in the database
+
   if (item != 0)
     return res
       .status(200)
-      .json({ sucess: false, message: 'Discord webhook already exist!' })
-  //To check if the discord URL is valid or not we will make an API request to discord to check.
-  const validurl = await sendTestWebhook(webhook)
+      .json({ success: false, message: 'Discord webhook already exist!' })
+  // We ping the url to check if the discord URL is valid.
+  const validURL = await sendTestWebhook(webhook)
 
-  if (validurl === 'error')
+  if (!validURL)
     return res
       .status(200)
-      .json({ sucess: false, message: 'Invalid discord webhook' })
+      .json({ success: false, message: 'Invalid discord webhook' })
 
   //Adding the url in the array and saving it
 
@@ -86,27 +86,10 @@ export default async function handler(
   await client.set('discordWebhook', JSON.stringify(parsedDiscordWebhookList))
   return res
     .status(200)
-    .json({ sucess: true, message: 'Discord webhook added!' })
+    .json({ success: true, message: 'Discord webhook added!' })
 }
 
-const checkRecaptcha = async (token: recaptchaPayload) => {
-  return await fetch(
-    `https://recaptchaenterprise.googleapis.com/v1/projects/${process.env.projectName}/assessments?key=${process.env.googleApiKey}`,
-    {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(token),
-    }
-  )
-    .then((response) => {
-      return response.json()
-    })
-    .catch((Error) => {
-      console.log(Error)
-    })
-}
-
-const sendTestWebhook = async (url: string) => {
+const sendTestWebhook = async (url: string): Promise<boolean> => {
   try {
     const webhook = {
       embeds: [
@@ -124,20 +107,19 @@ const sendTestWebhook = async (url: string) => {
       ],
     }
 
-    const request = await fetch(url, {
+    return await fetch(url, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(webhook),
     }).then((response) => {
       if (response.status == 204) {
-        return 'sucess'
+        return true
       } else {
-        return 'error'
+        return false
       }
     })
-    return request
   } catch (error) {
-    return 'error'
+    return false
   }
 }
 
@@ -180,15 +162,15 @@ const sendWebhooks = async (
       ],
     }
 
-    var discordWebHooksList = await client.get('discordWebhook')
-    //Checks if discordWebhooks urls exist in our database IF NOT, it creates it then re runs the functions.
+    let discordWebHooksList = await client.get('discordWebhook')
+    //Checks if discordWebhooks URLs exist in our database IF NOT, it creates it and then re-runs the functions.
     if (discordWebHooksList == null)
-      return adddiscordWebHooksList().then(
+      return addDiscordWebHooksList().then(
         await sendWebhooks(url, scriptURL, checkSum, identifier)
       )
 
-    await JSON.parse(discordWebHooksList).forEach(async (element: string) => {
-      await fetch(element, {
+    await JSON.parse(discordWebHooksList).forEach((element: string) => {
+      fetch(element, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(webhook),
@@ -201,7 +183,7 @@ const sendWebhooks = async (
   }
 }
 
-const adddiscordWebHooksList = async () => {
+const addDiscordWebHooksList = async () => {
   await client.set('discordWebhook', '[]')
 }
 
