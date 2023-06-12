@@ -113,7 +113,7 @@ export default function Decoder() {
       <h1 className={"text-center text-2xl mb-4"}>
         PerimeterX Payload {decode ? "Decode" : "Encode"}
       </h1>
-      <div className="bg-gradient-to-t from-darkCustomColour to-[#0c0a16]  h-full rounded-md">
+      <div className="bg-gradient-to-t from-darkCustomColour to-[#110d1e]  h-full rounded-md">
         <SettingToolBar
           setDecode={setDecode}
           decode={decode}

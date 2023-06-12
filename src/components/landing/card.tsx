@@ -6,7 +6,7 @@ export default function Card() {
     <div key={index} className="overflow-hidden rounded-lg shadow-lg basis-1/3">
       <div className="flex flex-col justify-between bg-white p-6 ">
         <div className="flex-1">
-          <h1 className="text-xl font-semibold text-gray-900">{post.title}</h1>
+          <h1 className="text-md font-semibold text-gray-900">{post.title}</h1>
           <hr />
           <p className="mt-3 text-base text-gray-500">{post.description}</p>
           {post.link.map((bp, index) => {
