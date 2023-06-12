@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const CreditSection = () => {
   return (
-    <div className="min-h-screen p-10">
+    <div className="p-10">
       <div className="mb-4">
         <Link href="/" className="text-blue-500 hover:underline">
           Home

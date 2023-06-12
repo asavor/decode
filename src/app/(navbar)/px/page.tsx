@@ -6,7 +6,6 @@ export default function Px() {
     <main className={"container mx-auto flex flex-col h-screen px-3"}>
       <Navbar></Navbar>
       <Decoder></Decoder>
-      <Footer></Footer>
     </main>
   );
 }

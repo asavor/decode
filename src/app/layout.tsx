@@ -12,7 +12,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={"bg-darkCustomColour min-h-screen h-auto"}>
+      <body className={"bg-darkCustomColour"}>
         {children}
         <Analytics />
       </body>
