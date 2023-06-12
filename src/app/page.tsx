@@ -3,7 +3,7 @@ import Footer from "@/components/footer/footer";
 
 export default function Home() {
   return (
-    <main className=" pt-16 container mx-auto relative flex flex-col h-screen justify-between">
+    <main className=" pt-16 container mx-auto relative flex flex-col min-h-screen h-auto justify-between">
       <div className="text-center">
         <h2 className="text-3xl  font-extrabold tracking-tight text-white sm:text-4xl">
           decode.antibot.to

@@ -11,7 +11,9 @@ export default function DecodeLayout({
 }) {
   return (
     <section
-      className={"bg-darkCustomColour h-screen flex flex-col justify-between"}
+      className={
+        "bg-darkCustomColour min-h-screen h-auto flex flex-col justify-between"
+      }
     >
       {children}
       <Footer></Footer>
