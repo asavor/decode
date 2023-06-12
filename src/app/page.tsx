@@ -3,7 +3,7 @@ import Footer from "@/components/footer/footer";
 
 export default function Home() {
   return (
-    <main className=" pt-16 container mx-auto relative">
+    <main className=" pt-16 container mx-auto relative flex flex-col h-screen justify-between">
       <div className="text-center">
         <h2 className="text-3xl  font-extrabold tracking-tight text-white sm:text-4xl">
           decode.antibot.to
@@ -12,11 +12,11 @@ export default function Home() {
           Open source tools to help reversing
         </p>
       </div>
-      <div className="flex lg:flex-row justify-between gap-6 lg:px-24 mt-12 flex-col px-7">
+      <div className="mb-auto flex lg:flex-row justify-between gap-6 lg:px-24 mt-12 flex-col px-7">
         {Card()}
       </div>
 
-      {/*<Footer></Footer>*/}
+      <Footer></Footer>
     </main>
   );
 }

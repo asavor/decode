@@ -13,7 +13,7 @@ export default function Footer() {
       >
         github.com/asavor
       </a>
-      <Link href={"credit"} className={"text-white text-xl font-bold"}>
+      <Link href={"credits"} className={"text-white text-xl font-bold"}>
         credits
       </Link>
     </div>

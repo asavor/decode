@@ -13,7 +13,7 @@ export default function Card() {
             return (
               <Link
                 key={index}
-                href={"/px"}
+                href={bp.href}
                 className="inline-flex items-center justify-center rounded-md border border-transparent bg-white lg:px-5 py-3 text-base font-medium text-indigo-600 hover:bg-indigo-50 ml-3 mt-5 shadow-lg"
               >
                 {bp.name}
