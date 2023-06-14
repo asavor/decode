@@ -5,13 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4bbc234-debb-42e1-8a4c-81a33d5564e8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/public/website/AnatomyofaSupremeBot.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/website/ReverseEngineeringTiktokVMObfuscation.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/website/TakingalookatthefirstpartoftheIncapsulaantibot _ Nero’s Blog.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/website/Как сайтыопределяютботов_ ДеобфускацияAkamaiBotManager2.0 _ Хабр.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/openSourceTools/constant/creditList.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/openSourceTools/constant/creditList.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/openSourceTools/constant/openSourceToolsList.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/openSourceTools/constant/openSourceToolsList.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/openSourceTools/toolsCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/openSourceTools/toolsCard.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -84,7 +78,7 @@
       <workItem from="1686558620545" duration="56000" />
       <workItem from="1686558799545" duration="2006000" />
       <workItem from="1686560906985" duration="233000" />
-      <workItem from="1686706146575" duration="2625000" />
+      <workItem from="1686706146575" duration="3039000" />
     </task>
     <servers />
   </component>
