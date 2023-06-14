@@ -76,10 +76,10 @@ export default function ToolsCard({
             <a
               key={index}
               className="button mx-1 text-center rounded-lg border py-2 px-4 place-self-center  hover:bg-gradient-to-r from-white via-purple-200 to-white text-white"
-              href={projectUrl.length == 1 ? projectUrl[0] : projectUrl[1]}
+              href={projectUrl.length == 1 ? projectUrl[0] : projectUrl[index]}
               target="_blank"
             >
-              {index}
+              {index + 1}
             </a>
           ))}
         </div>

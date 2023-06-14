@@ -39,7 +39,40 @@ const OpenSourceTools = [
     ],
     imageUrl: "/website/DeobfuscatingImpervasutmvcAntiBotScript.png",
     description: "",
-    category: ["antibot", "incapsula", "ast"],
+    category: ["antibot", "incapsula", "ast", "control-flow"],
+  },
+  {
+    projectName: "Reverse Engineering Tiktok's VM Obfuscation",
+    projectUrl: ["https://www.nullpt.rs/reverse-engineering-tiktok-vm-1"],
+    imageUrl: "/website/ReverseEngineeringTiktokVMObfuscation.png",
+    description: "",
+    category: ["vm", "tiktok", "ast"],
+  },
+
+  {
+    projectName:
+      "How do websites identify bots? Akamai Bot Manager 2.0 deobfuscation",
+    projectUrl: [
+      "How do websites identify bots? Akamai Bot Manager 2.0 deobfuscation",
+    ],
+    imageUrl:
+      "/website/Как сайтыопределяютботов_ ДеобфускацияAkamaiBotManager2.0 _ Хабр.png",
+    description: "",
+    category: ["akamai", "ast", "antibot"],
+  },
+  {
+    projectName: "Taking a look at the first part of the Incapsula antibot",
+    projectUrl: [
+      "https://nerodesu017.github.io/antibots/programming/2021/05/07/antibots-part-3.html",
+      "https://nerodesu017.github.io/antibots/programming/2021/05/07/antibots-part-4.html",
+      "https://nerodesu017.github.io/antibots/programming/2021/05/08/antibots-part-5.html",
+      "https://nerodesu017.github.io/antibots/programming/2021/05/09/antibots-part-6.html",
+      "https://nerodesu017.github.io/antibots/programming/2021/05/11/antibots-part-7.html",
+    ],
+    imageUrl:
+      "/website/TakingalookatthefirstpartoftheIncapsulaantibot _ Nero’s Blog.png",
+    description: "",
+    category: ["antibot", "incapsula", "ast", "control-flow"],
   },
 ];
 
