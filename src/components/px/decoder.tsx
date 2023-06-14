@@ -109,7 +109,7 @@ export default function Decoder() {
   }, [payload, uuid, sts]);
 
   return (
-    <div className={"w-full grow mb-auto"}>
+    <div className={"w-full grow h-full"}>
       <h1 className={"text-center text-2xl mb-4"}>
         PerimeterX Payload {decode ? "Decode" : "Encode"}
       </h1>

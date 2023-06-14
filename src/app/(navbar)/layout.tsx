@@ -1,4 +1,5 @@
 import Footer from "@/components/footer/footer";
+import Navbar from "@/components/navbar/navbar";
 
 export const metadata = {
   title: "decode px | antibot.to",
@@ -11,10 +12,9 @@ export default function DecodeLayout({
 }) {
   return (
     <section
-      className={
-        "bg-darkCustomColour min-h-screen h-auto flex flex-col justify-between"
-      }
+      className={"bg-darkCustomColour h-screen flex flex-col justify-between"}
     >
+      <Navbar></Navbar>
       {children}
       <Footer></Footer>
     </section>
