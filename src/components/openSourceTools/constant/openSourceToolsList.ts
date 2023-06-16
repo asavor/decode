@@ -52,9 +52,7 @@ const OpenSourceTools = [
   {
     projectName:
       "How do websites identify bots? Akamai Bot Manager 2.0 deobfuscation",
-    projectUrl: [
-      "How do websites identify bots? Akamai Bot Manager 2.0 deobfuscation",
-    ],
+    projectUrl: ["https://habr.com/ru/articles/720588/"],
     imageUrl:
       "/website/Как сайтыопределяютботов_ ДеобфускацияAkamaiBotManager2.0 _ Хабр.png",
     description: "",
