@@ -14,11 +14,7 @@ export default function Decoder() {
   const [sts, setSts] = useState("");
   const [finalPayload, setFinalPayload] = useState("");
   const [payload, setPayload] = useState("");
-  const [orderPayloadKey, setOrderPayloadKey] = useState(
-    localStorage.getItem("orderPayloadKey") == null
-      ? false
-      : localStorage.getItem("orderPayloadKey") == "true"
-  );
+  const [orderPayloadKey, setOrderPayloadKey] = useState(false);
   const [orderedFinalPayload, setOrderedFinalPayload] = useState("");
 
   const updateUuid = (props?: ChangeEvent<HTMLInputElement>, sent?: string) => {

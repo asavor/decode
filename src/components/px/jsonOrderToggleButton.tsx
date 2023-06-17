@@ -11,8 +11,15 @@ export default function JsonOrderToggleButton({
   setOrderPayloadKey: Dispatch<SetStateAction<boolean>>;
 }) {
   useEffect(() => {
+    // if (localStorage.getItem("orderPayloadKey") == null) {
+    //   localStorage.setItem("orderPayloadKey", "false");
+    // } else if (localStorage.getItem("orderPayloadKey") == "true") {
+    //   setOrderPayloadKey(true);
+    // }
+
     localStorage.setItem("orderPayloadKey", orderPayloadKey.toString());
   }, [orderPayloadKey]);
+
   return (
     <div className={"flex"}>
       <p className={"text-white font-Exo font-semibold mt-1 mr-1"}>
