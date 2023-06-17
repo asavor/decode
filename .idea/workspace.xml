@@ -5,9 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b4bbc234-debb-42e1-8a4c-81a33d5564e8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/px/jsonOrderToggleButton.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/openSourceTools/constant/creditList.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/openSourceTools/constant/creditList.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/footer/footer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/footer/footer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/openSourceTools/constant/openSourceToolsList.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/openSourceTools/constant/openSourceToolsList.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/px/decoder.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/px/decoder.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/px/inputTextArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/px/inputTextArea.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/px/settingToolbar.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/px/settingToolbar.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +85,9 @@
       <workItem from="1686560906985" duration="233000" />
       <workItem from="1686706146575" duration="3151000" />
       <workItem from="1686750036988" duration="198000" />
-      <workItem from="1686895751698" duration="52000" />
+      <workItem from="1686895751698" duration="638000" />
+      <workItem from="1686906916994" duration="75000" />
+      <workItem from="1686999326311" duration="5162000" />
     </task>
     <servers />
   </component>
