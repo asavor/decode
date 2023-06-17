@@ -1,4 +1,4 @@
-interface user {
+interface tool {
   projectName: string;
   projectUrl: string[];
   imageUrl: string;
@@ -6,7 +6,7 @@ interface user {
   category: string[];
 }
 
-const OpenSourceTools = [
+const OpenSourceTools: tool[] = [
   {
     projectName: "TrackMe",
     projectUrl: ["https://tls.peet.ws/"],

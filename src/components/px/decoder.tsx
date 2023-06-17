@@ -14,6 +14,12 @@ export default function Decoder() {
   const [sts, setSts] = useState("");
   const [finalPayload, setFinalPayload] = useState("");
   const [payload, setPayload] = useState("");
+  const [orderPayloadKey, setOrderPayloadKey] = useState(
+    localStorage.getItem("orderPayloadKey") == null
+      ? false
+      : localStorage.getItem("orderPayloadKey") == "true"
+  );
+  const [orderedFinalPayload, setOrderedFinalPayload] = useState("");
 
   const updateUuid = (props?: ChangeEvent<HTMLInputElement>, sent?: string) => {
     if (sent) {
@@ -78,6 +84,7 @@ export default function Decoder() {
   useEffect(() => {
     setPayload(() => "");
     setFinalPayload(() => "");
+    setOrderedFinalPayload(() => "");
     setSts(() => "");
     setUuid(() => "");
   }, [decode]);
@@ -88,9 +95,22 @@ export default function Decoder() {
         if (payload == "") {
           updateFinalPayload("");
         }
-        const value = JSON.parse(deobfuscate(payload, uuid, sts));
-        const parse = JSON.stringify(value, null, 4);
-        updateFinalPayload(parse);
+
+        const decodedPayload = JSON.parse(deobfuscate(payload, uuid, sts));
+
+        updateFinalPayload(JSON.stringify(decodedPayload, null, 4));
+
+        for (let i = 0; i < Object.keys(decodedPayload).length; i++) {
+          const orderedKey = Object.keys(decodedPayload[i]["d"])
+            .sort()
+            .reduce((obj, key) => {
+              // @ts-ignore
+              obj[key] = decodedPayload[i]["d"][key];
+              return obj;
+            }, {});
+          decodedPayload[i]["d"] = orderedKey;
+        }
+        setOrderedFinalPayload(JSON.stringify(decodedPayload, null, 4));
       } catch (error) {
         updateFinalPayload(deobfuscate(payload, uuid, sts));
       }
@@ -109,11 +129,12 @@ export default function Decoder() {
   }, [payload, uuid, sts]);
 
   return (
-    <div className={"w-full grow h-full"}>
+    <div className={"w-full h-full relative"}>
       <h1 className={"text-center text-2xl mb-4"}>
         PerimeterX Payload {decode ? "Decode" : "Encode"}
       </h1>
-      <div className="bg-gradient-to-t from-darkCustomColour to-[#110d1e]  h-full rounded-md">
+
+      <div className="bg-gradient-to-t from-darkCustomColour to-[#110d1e] h-full rounded-md relative">
         <SettingToolBar
           setDecode={setDecode}
           decode={decode}
@@ -121,16 +142,20 @@ export default function Decoder() {
           setSts={setSts}
           uuid={uuid}
           setUuid={setUuid}
+          orderPayloadKey={orderPayloadKey}
+          setOrderPayloadKey={setOrderPayloadKey}
         ></SettingToolBar>
-        <div
-          className={"flex md:flex-row flex-col gap-6 pt-16 pb-2 px-4 h-full"}
-        >
+        <div className={"flex md:flex-row flex-col gap-6 px-4 h-full pb-20"}>
           <InputTextArea
             decode={decode}
             payload={payload}
             updatePayload={updatePayload}
           ></InputTextArea>
-          <OutputText decode={decode} finalPayload={finalPayload}></OutputText>
+          <OutputText
+            orderPayloadKey={orderPayloadKey}
+            decode={decode}
+            finalPayload={orderPayloadKey ? orderedFinalPayload : finalPayload}
+          ></OutputText>
         </div>
       </div>
     </div>

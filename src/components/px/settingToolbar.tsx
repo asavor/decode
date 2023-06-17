@@ -1,6 +1,7 @@
 import SettingButton from "@/components/px/settingButton";
 import { Dropdown } from "@/components/px/dropdown";
 import { Dispatch, SetStateAction } from "react";
+import JsonOrderToggleButton from "@/components/px/jsonOrderToggleButton";
 
 export default function SettingToolBar({
   decode,
@@ -9,6 +10,8 @@ export default function SettingToolBar({
   setSts,
   uuid,
   setUuid,
+  orderPayloadKey,
+  setOrderPayloadKey,
 }: {
   decode: number;
   setDecode: Dispatch<SetStateAction<number>>;
@@ -16,22 +19,30 @@ export default function SettingToolBar({
   setSts: Dispatch<SetStateAction<string>>;
   uuid: string;
   setUuid: Dispatch<SetStateAction<string>>;
+  orderPayloadKey: boolean;
+  setOrderPayloadKey: Dispatch<SetStateAction<boolean>>;
 }) {
   return (
-    <div className={"flex justify-center "}>
-      <div className={"flex flex-row mt-4 absolute"}>
-        <Dropdown decode={decode} setDecode={setDecode}></Dropdown>
-        <SettingButton
-          buttonTitle={"uuid"}
-          value={uuid}
-          setValue={setUuid}
-        ></SettingButton>
-        <SettingButton
-          buttonTitle={"sts"}
-          value={sts}
-          setValue={setSts}
-        ></SettingButton>
-      </div>
+    <div
+      className={
+        "flex px-2 md:justify-center md:flex-row flex-col gap-2 mb-4 pt-4"
+      }
+    >
+      <Dropdown decode={decode} setDecode={setDecode}></Dropdown>
+      <SettingButton
+        buttonTitle={"uuid"}
+        value={uuid}
+        setValue={setUuid}
+      ></SettingButton>
+      <SettingButton
+        buttonTitle={"sts"}
+        value={sts}
+        setValue={setSts}
+      ></SettingButton>
+      <JsonOrderToggleButton
+        orderPayloadKey={orderPayloadKey}
+        setOrderPayloadKey={setOrderPayloadKey}
+      ></JsonOrderToggleButton>
     </div>
   );
 }

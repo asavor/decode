@@ -5,17 +5,17 @@ const inter = Inter({ subsets: ["latin"] });
 export default function Footer() {
   return (
     <div
-      className={`w-full text-center flex flex-col mt-20 h-24 ${inter.className}`}
+      className={`w-full text-center flex flex-col mt-16 h-18 md:mt-20 md:h-24 ${inter.className}`}
     >
       <a
-        className={"text-white text-xl inter font-semibold"}
+        className={"text-white text-xl inter font-medium"}
         href={"https://github.com/asavor"}
       >
         github.com/asavor
       </a>
       <Link
         href={"/opensource-tools/credits"}
-        className={"text-white text-xl font-bold"}
+        className={"text-white text-xl font-semibold"}
       >
         credits
       </Link>
