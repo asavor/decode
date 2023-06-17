@@ -1,4 +1,5 @@
-import { Dispatch, SetStateAction } from "react";
+"use client";
+import { Dispatch, SetStateAction, useEffect } from "react";
 
 import { Switch } from "@headlessui/react";
 
@@ -9,22 +10,24 @@ export default function JsonOrderToggleButton({
   orderPayloadKey: boolean;
   setOrderPayloadKey: Dispatch<SetStateAction<boolean>>;
 }) {
-  const toggleButton = () => {
-    setOrderPayloadKey(!orderPayloadKey);
-  };
+  useEffect(() => {
+    localStorage.setItem("orderPayloadKey", orderPayloadKey.toString());
+  }, [orderPayloadKey]);
   return (
-    <div>
-      <p className={"text-white font-Exo font-semibold"}>{orderPayloadKey}</p>
+    <div className={"flex"}>
+      <p className={"text-white font-Exo font-semibold mt-1 mr-1"}>
+        {"Order Keys"}
+      </p>
       <div className={"  "}>
         <Switch
           checked={orderPayloadKey}
           onChange={setOrderPayloadKey}
-          className={`border-[1px] border-[#2a73ed] relative inline-flex h-[40px] w-[116px] items-center rounded-[4px]`}
+          className={`border-[1px] border-indigo-400 relative inline-flex h-[32px] w-[116px] items-center rounded-[4px]`}
         >
           <span
             className={`${
-              orderPayloadKey ? "translate-x-[3px]" : "translate-x-[57px]"
-            } inline-block h-[34px] w-[55px] transform transition relative bg-circleColor rounded-[4px]`}
+              orderPayloadKey ? "translate-x-[-1px]" : "translate-x-[60px]"
+            } inline-block h-[34px] w-[55px] transform transition relative bg-indigo-700 rounded-[4px]`}
           />
           <div
             className={"flex justify-between text-white w-full absolute px-4"}

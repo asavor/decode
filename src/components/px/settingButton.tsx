@@ -10,19 +10,18 @@ export default function SettingButton({
   setValue: Dispatch<SetStateAction<string>>;
 }) {
   return (
-    <div className="flex justify-start ">
+    <div className="flex justify-start">
       <label
         htmlFor={buttonTitle}
-        className="mr-3 block text-lg font-medium text-white "
+        className="mr-1 block text-lg font-medium text-white "
       >
         {buttonTitle}
       </label>
-      <div className="relative  rounded-md shadow-sm">
-        <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3"></div>
+      <div className="rounded-md shadow-sm w-full">
         <input
           type="text"
           name={buttonTitle}
-          className="block w-full rounded-md border-gray-300 bg-slate-900 py-1 px-1 text-white"
+          className="block w-full rounded-md border-gray-300 bg-slate-900 py-1 px-1 text-white focus:outline-none focus:ring-indigo-500"
           placeholder={buttonTitle == "sts" ? "1651526936831" : "uuid"}
           value={value}
           onChange={(e) => setValue(e.target.value)}

@@ -19,7 +19,7 @@ function Dropdown({
       {({ open }) => (
         <>
           <div className="relative">
-            <Listbox.Button className=" cursor-selector rounded-md border border-gray-300 bg-white py-1 pl-3 pr-10 text-left sm:text-sm text-black">
+            <Listbox.Button className=" cursor-selector rounded-md border border-gray-300 bg-white py-1 pl-3 pr-10 text-left sm:text-sm text-black w-full">
               <span className="flex items-center">
                 <span className="ml-3 block truncate">
                   {decode ? "Decode" : "Encode"}

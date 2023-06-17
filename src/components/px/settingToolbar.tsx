@@ -23,24 +23,26 @@ export default function SettingToolBar({
   setOrderPayloadKey: Dispatch<SetStateAction<boolean>>;
 }) {
   return (
-    <div className={"flex justify-center"}>
-      <div className={"flex flex-row mt-4"}>
-        <Dropdown decode={decode} setDecode={setDecode}></Dropdown>
-        <SettingButton
-          buttonTitle={"uuid"}
-          value={uuid}
-          setValue={setUuid}
-        ></SettingButton>
-        <SettingButton
-          buttonTitle={"sts"}
-          value={sts}
-          setValue={setSts}
-        ></SettingButton>
-        <JsonOrderToggleButton
-          orderPayloadKey={orderPayloadKey}
-          setOrderPayloadKey={setOrderPayloadKey}
-        ></JsonOrderToggleButton>
-      </div>
+    <div
+      className={
+        "flex px-2 md:justify-center md:flex-row flex-col gap-2 mb-4 pt-4"
+      }
+    >
+      <Dropdown decode={decode} setDecode={setDecode}></Dropdown>
+      <SettingButton
+        buttonTitle={"uuid"}
+        value={uuid}
+        setValue={setUuid}
+      ></SettingButton>
+      <SettingButton
+        buttonTitle={"sts"}
+        value={sts}
+        setValue={setSts}
+      ></SettingButton>
+      <JsonOrderToggleButton
+        orderPayloadKey={orderPayloadKey}
+        setOrderPayloadKey={setOrderPayloadKey}
+      ></JsonOrderToggleButton>
     </div>
   );
 }
