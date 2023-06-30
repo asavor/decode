@@ -37,18 +37,24 @@ export default function SettingToolBar({
           "flex px-2 md:justify-center md:flex-row flex-col gap-2 mb-4 pt-4 flex-grow"
         }
       >
-        <Dropdown decode={decode} setDecode={setDecode}></Dropdown>
+        <Dropdown
+          decode={decode}
+          setDecode={setDecode}
+          disabled={shareMode}
+        ></Dropdown>
         <SettingButton
           buttonTitle={"uuid"}
           value={uuid}
           setValue={setUuid}
+          disabled={shareMode}
         ></SettingButton>
         <SettingButton
           buttonTitle={"sts"}
           value={sts}
           setValue={setSts}
+          disabled={shareMode}
         ></SettingButton>
-        <div className={"flex space-x-2  gap-6"}>
+        <div className={"flex space-x-2 gap-6"}>
           <JsonOrderToggleButton
             orderPayloadKey={orderPayloadKey}
             setOrderPayloadKey={setOrderPayloadKey}
