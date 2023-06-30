@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal" created-in="GO-231.9161.41">
+    <data-source name="0@correct-mosquito-38512.kv.vercel-storage.com" uuid="65de3920-77a8-4f74-a69f-0cb072982d78">
+      <database-info product="Redis" version="6.2.6" jdbc-version="4.2" driver-name="Redis JDBC Driver" driver-version="1.3" dbms="REDIS" exact-version="6.2.6" exact-driver-version="1.3" />
+      <case-sensitivity plain-identifiers="mixed" quoted-identifiers="mixed" />
+      <user-name>default</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" negative="1" />
+        </introspection-scope>
+      </schema-mapping>
+      <ssl-config>
+        <enabled>true</enabled>
+      </ssl-config>
+    </data-source>
+  </component>
+</project>

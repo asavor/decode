@@ -31,11 +31,30 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
+<<<<<<< Updated upstream
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;order-payload-key-feature&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/ashbin/Desktop/decode/public/website&quot;,
+=======
+    &quot;ACTIVE_CLOUD_PROJECT_ACCOUNT&quot;: &quot;ashbinr.dev@gmail.com&quot;,
+    &quot;ACTIVE_CLOUD_PROJECT_ID&quot;: &quot;notequedessintrabajo&quot;,
+    &quot;ACTIVE_CLOUD_PROJECT_NAME&quot;: &quot;notequedessintrabajo&quot;,
+    &quot;ACTIVE_CLOUD_PROJECT_NUMBER&quot;: &quot;656944596918&quot;,
+    &quot;DefaultGoTemplateProperty&quot;: &quot;Go File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.formatter.settings.were.checked&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.migrated.go.modules.settings&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.go.modules.go.list.on.any.changes.was.set&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;com.google.cloudcode.ide_session_index&quot;: &quot;20230628_0001&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;share-feature&quot;,
+    &quot;go.import.settings.migrated&quot;: &quot;true&quot;,
+    &quot;go.sdk.automatically.set&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/ashbin/Desktop/decode&quot;,
+>>>>>>> Stashed changes
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -84,7 +103,14 @@
       <workItem from="1686750036988" duration="198000" />
       <workItem from="1686895751698" duration="638000" />
       <workItem from="1686906916994" duration="75000" />
+<<<<<<< Updated upstream
       <workItem from="1686999326311" duration="13618000" />
+=======
+      <workItem from="1686999326311" duration="10496000" />
+      <workItem from="1687953856410" duration="101000" />
+      <workItem from="1687954016354" duration="11000" />
+      <workItem from="1687954049075" duration="2244000" />
+>>>>>>> Stashed changes
     </task>
     <servers />
   </component>

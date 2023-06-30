@@ -4,10 +4,12 @@ export default function SettingButton({
   buttonTitle,
   value,
   setValue,
+  disabled,
 }: {
   buttonTitle: string;
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
+  disabled: boolean;
 }) {
   return (
     <div className="flex justify-start">
@@ -20,6 +22,7 @@ export default function SettingButton({
       <div className="rounded-md shadow-sm w-full">
         <input
           type="text"
+          disabled={disabled}
           name={buttonTitle}
           className="block w-full rounded-md border-gray-300 bg-slate-900 py-1 px-1 text-white focus:outline-none focus:ring-indigo-500"
           placeholder={buttonTitle == "sts" ? "1651526936831" : "uuid"}

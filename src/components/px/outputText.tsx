@@ -9,7 +9,7 @@ export default function OutputText({
   finalPayload,
   orderPayloadKey,
 }: {
-  decode: number;
+  decode: boolean;
   finalPayload?: string;
   orderPayloadKey: boolean;
 }) {

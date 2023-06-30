@@ -1,19 +1,31 @@
 "use client";
 
 import InputTextArea from "@/components/px/inputTextArea";
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import SettingToolBar from "@/components/px/settingToolbar";
 import deobfuscate from "../../module/px/js/encode";
 import obfuscatePayload from "../../module/px/js/decode";
 import OutputText from "@/components/px/outputText";
 import { mode } from "@/components/px/constant/mode";
+import { sharePayloadData } from "@/app/(navbar)/px/[id]/interface";
 
-export default function Decoder() {
-  const [decode, setDecode] = useState(1);
+export default function ShareDecode({
+  sharePayload = {
+    payload: "",
+    decode: true,
+    created_at: 0,
+    is_owner: false,
+  },
+}: {
+  sharePayload?: sharePayloadData;
+}) {
+  const [decode, setDecode] = useState(sharePayload.decode);
   const [uuid, setUuid] = useState("");
   const [sts, setSts] = useState("");
+  const [startPayload, setStartPayload] = useState(atob(sharePayload.payload));
   const [finalPayload, setFinalPayload] = useState("");
   const [payload, setPayload] = useState("");
+  const [IsOwner, setIsOwner] = useState(sharePayload.is_owner);
   const [orderPayloadKey, setOrderPayloadKey] = useState(false);
   const [orderedFinalPayload, setOrderedFinalPayload] = useState("");
 
@@ -33,28 +45,33 @@ export default function Decoder() {
     }
   };
 
-  const updatePayload = (props: any) => {
-    const InputPayload = props.target.value;
+  useMemo(() => {
     if (mode) {
-      if (InputPayload.includes("payload")) {
+      if (startPayload.includes("payload")) {
         try {
-          const ParsedUuid = InputPayload.match(`uuid=(.*)&ft`);
-          updateUuid(undefined, ParsedUuid[1]);
-          const ParsedPayload = InputPayload.match(`payload=(.*)&appId`);
-          setPayload(() => ParsedPayload[1]);
+          const ParsedUuid: RegExpMatchArray | null =
+            startPayload.match(`uuid=(.*)&ft`);
+          if (ParsedUuid) {
+            updateUuid(undefined, ParsedUuid[1]);
+          }
+          const ParsedPayload: RegExpMatchArray | null =
+            startPayload.match(`payload=(.*)&appId`);
+          if (ParsedPayload) {
+            setPayload(() => ParsedPayload[1]);
+          }
         } catch (error) {}
       } else {
-        setPayload(() => InputPayload);
+        setPayload(() => startPayload);
       }
     } else {
       try {
-        const payload = InputPayload;
+        const payload = startPayload;
 
         setPayload(() => payload);
         const regex = /"PX10206":"(.*?)","/gm;
         let m;
         while (
-          (m = regex.exec(JSON.stringify(JSON.parse(InputPayload)))) !== null
+          (m = regex.exec(JSON.stringify(JSON.parse(startPayload)))) !== null
         ) {
           if (m.index === regex.lastIndex) {
             regex.lastIndex++;
@@ -67,25 +84,15 @@ export default function Decoder() {
             }
           });
         }
-      } catch (error) {
-        updateFinalPayload("");
-      }
+      } catch (error) {}
     }
-  };
+  }, [startPayload]);
 
   const updateFinalPayload = (value: string) => {
     setFinalPayload(() => value);
   };
 
-  useEffect(() => {
-    setPayload(() => "");
-    setFinalPayload(() => "");
-    setOrderedFinalPayload(() => "");
-    setSts(() => "");
-    setUuid(() => "");
-  }, [decode]);
-
-  useEffect(() => {
+  useMemo(() => {
     if (decode) {
       try {
         if (payload == "") {
@@ -140,12 +147,15 @@ export default function Decoder() {
           setUuid={setUuid}
           orderPayloadKey={orderPayloadKey}
           setOrderPayloadKey={setOrderPayloadKey}
+          startPayload={startPayload}
+          shareMode={true}
+          IsOwner={IsOwner}
         ></SettingToolBar>
         <div className={"flex md:flex-row flex-col gap-6 px-4 h-full pb-20"}>
           <InputTextArea
             decode={decode}
             payload={payload}
-            updatePayload={updatePayload}
+            disabled={true}
           ></InputTextArea>
           <OutputText
             orderPayloadKey={orderPayloadKey}
