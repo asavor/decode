@@ -17,6 +17,7 @@ type ResponseBuilder interface {
 	WithBody(data interface{}) ResponseBuilder
 	WithError(err interface{}) ResponseBuilder
 	WithMessage(message string) ResponseBuilder
+	WithCookie(cookie http.Cookie) ResponseBuilder
 	Build(w http.ResponseWriter)
 }
 
@@ -61,6 +62,10 @@ func (rb *HTTPResponseBuilder) WithError(err interface{}) ResponseBuilder {
 	rb.body = &ResponsePayload{
 		Error: err,
 	}
+	return rb
+}
+func (rb *HTTPResponseBuilder) WithCookie(cookie http.Cookie) ResponseBuilder {
+	rb.response.Header.Set("Set-Cookie", cookie.String())
 	return rb
 }
 

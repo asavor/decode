@@ -10,12 +10,14 @@ function classNames(...classes: any) {
 function Dropdown({
   decode,
   setDecode,
+  disabled,
 }: {
-  decode: number;
-  setDecode: Dispatch<SetStateAction<number>>;
+  decode: boolean;
+  setDecode: Dispatch<SetStateAction<boolean>>;
+  disabled: boolean;
 }) {
   return (
-    <Listbox value={decode} onChange={setDecode}>
+    <Listbox value={decode} onChange={setDecode} disabled={disabled}>
       {({ open }) => (
         <>
           <div className="relative">
@@ -50,7 +52,7 @@ function Dropdown({
                         "relative cursor-default select-none py-2 pl-3 pr-9"
                       )
                     }
-                    value={option.id}
+                    value={option.id ? true : false}
                   >
                     {({ selected, active }) => (
                       <>

@@ -1,22 +1,26 @@
 import { pxEncodedPayload } from "@/components/px/constant/pxEncodedPayload";
 import { pxDecodedPayload } from "@/components/px/constant/pxDecodedPayload";
+import { Dispatch, SetStateAction } from "react";
 export default function InputTextArea({
   decode,
   payload,
-  updatePayload,
+  setStartPayload,
+  disabled,
 }: {
-  decode: number;
+  decode: boolean;
   payload: string;
-  updatePayload: any;
+  setStartPayload?: Dispatch<SetStateAction<string>>;
+  disabled: boolean;
 }) {
   return (
     <textarea
       className={
         "bg-gradient-to-b from-darkCustomColour to-[#0c0a16] basis-1/2 rounded-md focus:ring-0 focus:outline-0 resize-none text-white p-2 h-full"
       }
-      onChange={updatePayload}
+      // @ts-ignore
+      onChange={(e) => setStartPayload(e.target.value)}
       placeholder={decode ? pxEncodedPayload : pxDecodedPayload}
-      disabled={false}
+      disabled={disabled}
       value={payload}
     ></textarea>
   );
