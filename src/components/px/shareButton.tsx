@@ -50,7 +50,7 @@ export default function ShareButton({
     <div className="flex items-center space-x-4">
       <div className="relative inline-block text-left">
         <Menu>
-          <Menu.Button className="bg-blue-500 w-28 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center">
+          <Menu.Button className="bg-blue-500 w-28 text-white px-4 py-[5px] rounded hover:bg-blue-600 flex items-center mb-3">
             <ArrowTopRightOnSquareIcon className="h-5 w-5 mr-2" />
             Share
           </Menu.Button>

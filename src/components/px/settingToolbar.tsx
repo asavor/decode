@@ -31,27 +31,40 @@ export default function SettingToolBar({
   IsOwner?: boolean;
 }) {
   return (
-    <div className="flex justify-between items-center px-2 gap-2 mb-4 pt-4">
-      <div className="flex justify-center flex-grow">
-        <Dropdown decode={decode} setDecode={setDecode} disabled={shareMode} />
+    <div className="flex justify-between items-center">
+      <div
+        className={
+          "flex px-2 md:justify-center md:flex-row flex-col gap-2 mb-4 pt-4 flex-grow"
+        }
+      >
+        <Dropdown decode={decode} setDecode={setDecode}></Dropdown>
         <SettingButton
           buttonTitle={"uuid"}
           value={uuid}
           setValue={setUuid}
-          disabled={shareMode}
-        />
+        ></SettingButton>
         <SettingButton
           buttonTitle={"sts"}
           value={sts}
           setValue={setSts}
-          disabled={shareMode}
-        />
-        <JsonOrderToggleButton
-          orderPayloadKey={orderPayloadKey}
-          setOrderPayloadKey={setOrderPayloadKey}
-        />
+        ></SettingButton>
+        <div className={"flex space-x-2  gap-6"}>
+          <JsonOrderToggleButton
+            orderPayloadKey={orderPayloadKey}
+            setOrderPayloadKey={setOrderPayloadKey}
+          ></JsonOrderToggleButton>
+          <div className={"block lg:hidden"}>
+            {shareMode ? (
+              IsOwner ? (
+                <DeleteButton />
+              ) : null
+            ) : (
+              <ShareButton decode={decode} payload={startPayload} />
+            )}
+          </div>
+        </div>
       </div>
-      <div className={"flex space-x-2"}>
+      <div className={" mr-4 hidden lg:block"}>
         {shareMode ? (
           IsOwner ? (
             <DeleteButton />
