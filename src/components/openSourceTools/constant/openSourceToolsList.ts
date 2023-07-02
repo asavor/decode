@@ -10,14 +10,14 @@ const OpenSourceTools: tool[] = [
   {
     projectName: "TrackMe",
     projectUrl: ["https://tls.peet.ws/"],
-    imageUrl: "/website/trackme.png",
+    imageUrl: "/website/TrackMe.png",
     description: "",
     category: ["tls"],
   },
   {
     projectName: "ReverseJS",
     projectUrl: ["https://steakenthusiast.github.io/"],
-    imageUrl: "/website/reversejs.png",
+    imageUrl: "/website/ReverseJS.png",
     description: "",
     category: ["ast"],
   },
