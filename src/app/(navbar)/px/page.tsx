@@ -5,8 +5,8 @@ import InputTextArea from "@/components/px/inputTextArea";
 import OutputText from "@/components/px/outputText";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import { mode } from "@/components/px/constant/mode";
-import deobfuscate from "@/module/px/js/encode";
-import obfuscatePayload from "@/module/px/js/decode";
+import obfuscatePayload from "@/module/px/js/encode";
+import deobfuscate from "@/module/px/js/decode";
 
 export default function Px() {
   const [decode, setDecode] = useState(true);

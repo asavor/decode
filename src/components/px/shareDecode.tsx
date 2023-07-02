@@ -3,8 +3,8 @@
 import InputTextArea from "@/components/px/inputTextArea";
 import { ChangeEvent, useEffect, useMemo, useState } from "react";
 import SettingToolBar from "@/components/px/settingToolbar";
-import deobfuscate from "../../module/px/js/encode";
-import obfuscatePayload from "../../module/px/js/decode";
+import obfuscatePayload from "../../module/px/js/encode";
+import deobfuscate from "../../module/px/js/decode";
 import OutputText from "@/components/px/outputText";
 import { mode } from "@/components/px/constant/mode";
 import { sharePayloadData } from "@/app/(navbar)/px/[id]/interface";
